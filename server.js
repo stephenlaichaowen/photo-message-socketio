@@ -23,9 +23,8 @@ io.on('connection', socket => {
     // Persist to disk
     fs.writeFileSync(`${__dirname}/db.json`, JSON.stringify(messages))
 
-    // Broadcast new messages to all connected cients
+    // Broadcast all messages to all connected cients
     io.emit('all_messages', messages)
-
   })
 })
 
