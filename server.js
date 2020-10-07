@@ -14,26 +14,15 @@ io.on('connection', socket => {
   // Send messages to connected clients
   io.emit('all_messages', messages)
 
-  // socket.on('all_messages', messages => {
-  //   // Persist to disk
-  //   fs.writeFileSync(`${__dirname}/db.json`, JSON.stringify(messages))
-
-  //   // Send messages to connected clients
-  //   io.emit('all_messages', messages)
-  // })
-
   socket.on('removed_message', index => {
-  // socket.on('removed_message', id => {
     messages.splice(index, 1)
-    // messages.filter(message => message.id !== id)
-
+    
     // Persist to disk
     fs.writeFileSync(`${__dirname}/db.json`, JSON.stringify(messages))
 
     // Send messages to connected clients
-    io.emit('all_messages', messages)
-    // io.emit('removed_message', index)
-
+    // io.emit('all_messages', messages)
+    io.emit('removed_message', index)
   })
 
   // Listen for new messages
@@ -45,8 +34,8 @@ io.on('connection', socket => {
     fs.writeFileSync(`${__dirname}/db.json`, JSON.stringify(messages))
 
     // Send new message to all connected clients
-    // io.emit('new_message', message)
-    io.emit('all_messages', messages)
+    io.emit('new_message', message)
+    // io.emit('all_messages', messages)
   })
 })
 
