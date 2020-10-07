@@ -11,12 +11,15 @@ const messages = messageData ? JSON.parse(messageData) : []
 
 // Listen for new socket client (connection)
 io.on('connection', socket => {
-  // Send all messages to connecting client
+  // Send messages to connected clients
   io.emit('all_messages', messages)
 
   socket.on('all_messages', messages => {
     // Persist to disk
     fs.writeFileSync(`${__dirname}/db.json`, JSON.stringify(messages))
+
+    // Send messages to connected clients
+    io.emit('all_messages', messages)
   })
 
   socket.on('removed_message', index => {
@@ -27,7 +30,7 @@ io.on('connection', socket => {
     // Persist to disk
     fs.writeFileSync(`${__dirname}/db.json`, JSON.stringify(messages))
 
-    // Send all messages to connecting client
+    // Send messages to connected clients
     io.emit('all_messages', messages)
     // io.emit('removed_message', index)
 
