@@ -43,7 +43,7 @@ io.on('connection', socket => {
 
     // Send new message to all connected clients
     // io.emit('new_message', message)
-    io.emit('all_messages', message)
+    io.emit('all_messages', messages)
   })
 })
 
