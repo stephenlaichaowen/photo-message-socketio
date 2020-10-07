@@ -14,13 +14,13 @@ io.on('connection', socket => {
   // Send messages to connected clients
   io.emit('all_messages', messages)
 
-  socket.on('all_messages', messages => {
-    // Persist to disk
-    fs.writeFileSync(`${__dirname}/db.json`, JSON.stringify(messages))
+  // socket.on('all_messages', messages => {
+  //   // Persist to disk
+  //   fs.writeFileSync(`${__dirname}/db.json`, JSON.stringify(messages))
 
-    // Send messages to connected clients
-    io.emit('all_messages', messages)
-  })
+  //   // Send messages to connected clients
+  //   io.emit('all_messages', messages)
+  // })
 
   socket.on('removed_message', index => {
   // socket.on('removed_message', id => {
