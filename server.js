@@ -20,8 +20,7 @@ io.on('connection', socket => {
     // Persist to disk
     fs.writeFileSync(`${__dirname}/db.json`, JSON.stringify(messages))
 
-    // Send messages to connected clients
-    // io.emit('all_messages', messages)
+    // Send index to connected clients
     io.emit('removed_message', index)
   })
 
@@ -33,9 +32,8 @@ io.on('connection', socket => {
     // Persist to disk
     fs.writeFileSync(`${__dirname}/db.json`, JSON.stringify(messages))
 
-    // Send new message to all connected clients
+    // Send new message to connected clients
     io.emit('new_message', message)
-    // io.emit('all_messages', messages)
   })
 })
 
